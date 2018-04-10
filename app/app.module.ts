@@ -3,6 +3,8 @@ import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { AppRoutingModule } from "./app.routing";
 import { AppComponent } from "./app.component";
 import { HomeComponent } from "./home/home.component";
+import { HomeFormComponent } from "./home-form/home-form.component";
+import { HomeResultComponent } from "./home-result/home-result.component";
 
 
 
@@ -22,7 +24,9 @@ import { HomeComponent } from "./home/home.component";
     ],
     declarations: [
         AppComponent,
-        HomeComponent
+        HomeComponent,
+        HomeFormComponent,
+        HomeResultComponent
 
 
     ],
