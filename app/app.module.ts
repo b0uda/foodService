@@ -1,10 +1,14 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { AppRoutingModule } from "./app.routing";
+
 import { AppComponent } from "./app.component";
 import { HomeComponent } from "./home/home.component";
-import { HomeFormComponent } from "./home-form/home-form.component";
-import { HomeResultComponent } from "./home-result/home-result.component";
+
+import { FoodService } from "./food.service";
+
+import { NativeScriptFormsModule } from "nativescript-angular/forms";
+import { DropDownModule } from "nativescript-drop-down/angular";
 
 
 
@@ -20,18 +24,17 @@ import { HomeResultComponent } from "./home-result/home-result.component";
     ],
     imports: [
         NativeScriptModule,
-        AppRoutingModule
+        AppRoutingModule,
+        NativeScriptFormsModule,
+        DropDownModule,
+
     ],
     declarations: [
         AppComponent,
         HomeComponent,
-        HomeFormComponent,
-        HomeResultComponent
-
-
     ],
     providers: [
-
+        FoodService
     ],
     schemas: [
         NO_ERRORS_SCHEMA
@@ -40,4 +43,6 @@ import { HomeResultComponent } from "./home-result/home-result.component";
 /*
 Pass your application module to the bootstrapModule function located in main.ts to start your app
 */
-export class AppModule { }
+export class AppModule {
+
+}

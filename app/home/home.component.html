@@ -1,11 +1,32 @@
-<StackLayout>
-  <Label class="h1 title" text="Welcome to food service"></Label>
+<StackLayout #stackLayout>
+
+  <Image class="logo" stretch="fill" src="res://trend"></Image>
+
+
+  <StackLayout class="form" orientation="horizontal">
+    <TextField class="form-item" hint="What is ur budget" [(ngModel)]="budget"></TextField>
+
+    <DropDown class="form-item" #dd [items]="categories" [(ngModel)]="selectedIndex" (selectedIndexChanged)="onchange($event)"
+      (opened)="onopen()" (closed)="onclose()"></DropDown>
+
+    <Button class="form-item btn" text="load" (tap)="loadFood()"></Button>
+
+  </StackLayout>
 
 
 
-  <app-home-form></app-home-form>
-
-  <app-home-result></app-home-result>
+  <StackLayout class="result">
+    <ListView [items]="foodListFiltred" (itemTap)="onItemTap($event)" class="list-group">
+      <ng-template let-food="item" let-i="index" let-odd="odd" let-even="even">
+        <GridLayout columns="*,*,*,*" rows="*" class="list-group-item">
+          <Image horizontalAlignment="left" class="category" row="0" col="0" [src]="'res://'+food.category"></Image>
+          <Label horizontalAlignment="left" class="name" row="0" col="1" [text]="food.name"></Label>
+          <Label horizontalAlignment="left" class="price" row="0" col="2" [text]="food.price + 'Dh'"></Label>
+          <Label horizontalAlignment="left" class="place" row="0" col="3" [text]="food.place"></Label>
+        </GridLayout>
+      </ng-template>
+    </ListView>
+  </StackLayout>
 
 
 </StackLayout>
