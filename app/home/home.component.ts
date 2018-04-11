@@ -40,6 +40,8 @@ export class HomeComponent implements OnInit {
   // DropDown Menu Methods
   public onchange(args: SelectedIndexChangedEventData) {
     console.log(`Drop Down selected index changed from ${args.oldIndex} to ${args.newIndex}`);
+    this.selectedIndex = args.newIndex;
+    this.loadFood();
   }
 
   public onopen() {
@@ -57,17 +59,20 @@ export class HomeComponent implements OnInit {
     _stackLayout.className = _deviceType.toLowerCase();
     console.log(_deviceType);
 
+    // Load food App first load
+    this.loadFood();
+
   }
 
   // Load Food Method
-  loadFood(args) {
+  loadFood() {
     this.foodList = [];
-
+    console.log(`index is : ${this.selectedIndex}`);
     // if All is selected get All categories
     if (this.selectedIndex === 0) {
-      this.extractFoodByBudget()
+      this.extractFoodByBudget();
     } else {
-      this.extractFoodByCategory()
+      this.extractFoodByCategory();
     }
 
   }
@@ -88,6 +93,7 @@ export class HomeComponent implements OnInit {
   // call service ==> getFoodByCaterory
   extractFoodByCategory() {
     console.log("food by category called");
+    console.log(this.categories[this.selectedIndex]);
     this.foodService.getFoodByCategory(this.budget, this.categories[this.selectedIndex])
       .subscribe((result) => {
         this.onGetDataSuccess(result);
@@ -96,7 +102,6 @@ export class HomeComponent implements OnInit {
       });
   }
 
-
   // what to do with data returned from the service
   private onGetDataSuccess(res) {
     this.foodList = res;
@@ -104,7 +109,6 @@ export class HomeComponent implements OnInit {
 
   // what to do if service returns ERROR
   private onGetDataError(error: Response | any) {
-
     const body = error.json() || "";
     const err = body.error || JSON.stringify(body);
     console.log("onGetDataError: " + err);

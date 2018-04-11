@@ -2,7 +2,6 @@
 
   <Image class="logo" stretch="fill" src="res://trend"></Image>
 
-
   <StackLayout class="form" orientation="horizontal">
     <TextField class="form-item" hint="What is ur budget" [(ngModel)]="budget"></TextField>
 
@@ -12,8 +11,6 @@
     <Button class="form-item btn" text="load" (tap)="loadFood()"></Button>
 
   </StackLayout>
-
-
 
   <StackLayout class="result">
     <ListView [items]="foodList" (itemTap)="onItemTap($event)" class="list-group">
@@ -27,6 +24,5 @@
       </ng-template>
     </ListView>
   </StackLayout>
-
 
 </StackLayout>
