@@ -10,6 +10,7 @@ import { FoodService } from "./food.service";
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { DropDownModule } from "nativescript-drop-down/angular";
 
+import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
 
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
@@ -27,6 +28,7 @@ import { DropDownModule } from "nativescript-drop-down/angular";
         AppRoutingModule,
         NativeScriptFormsModule,
         DropDownModule,
+        NativeScriptHttpClientModule,
 
     ],
     declarations: [

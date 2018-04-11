@@ -16,7 +16,7 @@
 
 
   <StackLayout class="result">
-    <ListView [items]="foodListFiltred" (itemTap)="onItemTap($event)" class="list-group">
+    <ListView [items]="foodList" (itemTap)="onItemTap($event)" class="list-group">
       <ng-template let-food="item" let-i="index" let-odd="odd" let-even="even">
         <GridLayout columns="*,*,*,*" rows="*" class="list-group-item">
           <Image horizontalAlignment="left" class="category" row="0" col="0" [src]="'res://'+food.category"></Image>
