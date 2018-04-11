@@ -8,6 +8,7 @@
     <DropDown class="form-item" #dd [items]="categories" [(ngModel)]="selectedIndex" (selectedIndexChanged)="onchange($event)"
       (opened)="onopen()" (closed)="onclose()"></DropDown>
 
+
     <Button class="form-item btn" text="load" (tap)="loadFood()"></Button>
 
   </StackLayout>

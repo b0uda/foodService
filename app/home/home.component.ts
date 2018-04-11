@@ -27,7 +27,6 @@ export class HomeComponent implements OnInit {
   selectedIndex = 0;
   categories: Array<string>;
 
-
   // DOM Element Reference
   @ViewChild("stackLayout") stackLayout: ElementRef;
 
@@ -61,7 +60,6 @@ export class HomeComponent implements OnInit {
 
     // Load food App first load
     this.loadFood();
-
   }
 
   // Load Food Method
@@ -74,7 +72,6 @@ export class HomeComponent implements OnInit {
     } else {
       this.extractFoodByCategory();
     }
-
   }
 
   // backend service Methods
