@@ -23,9 +23,13 @@ export class HomeComponent implements OnInit {
   foodList: Array<Food>;
   result: string;
 
-  // DropDown Attributes
+  // DropDown Categories Attributes
   selectedIndex = 0;
   categories: Array<string>;
+
+  // DropDown Categories Attributes
+  selectedIndexPlaces = 0;
+  places;
 
   // DOM Element Reference
   @ViewChild("stackLayout") stackLayout: ElementRef;
@@ -36,9 +40,9 @@ export class HomeComponent implements OnInit {
     this.categories = ["All", "burger", "tacos", "pizza", "sandwich", "pasta"];
   }
 
-  // DropDown Menu Methods
+  // DropDown Category Menu Methods
   public onchange(args: SelectedIndexChangedEventData) {
-    console.log(`Drop Down selected index changed from ${args.oldIndex} to ${args.newIndex}`);
+    console.log(`Drop Down category selected index changed from ${args.oldIndex} to ${args.newIndex}`);
     this.selectedIndex = args.newIndex;
     this.loadFood();
   }
@@ -47,9 +51,25 @@ export class HomeComponent implements OnInit {
     console.log("Drop Down opened.");
   }
 
+  public onPlacesClose() {
+    console.log("Drop Down closed.");
+  }
+
+  // DropDown Places Menu Methods
+  public onPlaceschange(args: SelectedIndexChangedEventData) {
+    console.log(`Drop Down places selected index changed from ${args.oldIndex} to ${args.newIndex}`);
+    this.selectedIndexPlaces = args.newIndex;
+    this.loadFood();
+  }
+
+  public onPlacesOpen() {
+    console.log("Drop Down opened.");
+  }
+
   public onclose() {
     console.log("Drop Down closed.");
   }
+
 
   // NgInit
   ngOnInit() {
@@ -58,6 +78,8 @@ export class HomeComponent implements OnInit {
     _stackLayout.className = _deviceType.toLowerCase();
     console.log(_deviceType);
 
+    this.initPlacesDropDown();
+
     // Load food App first load
     this.loadFood();
   }
@@ -65,16 +87,30 @@ export class HomeComponent implements OnInit {
   // Load Food Method
   loadFood() {
     this.foodList = [];
-    console.log(`index is : ${this.selectedIndex}`);
+    console.log(`category index is : ${this.selectedIndex} && place index is : ${this.selectedIndexPlaces}`);
     // if All is selected get All categories
-    if (this.selectedIndex === 0) {
+    if (this.selectedIndex === 0 && this.selectedIndexPlaces === 0) {
       this.extractFoodByBudget();
-    } else {
+    } else if (this.selectedIndex > 0 && this.selectedIndexPlaces === 0) {
       this.extractFoodByCategory();
+    } else if (this.selectedIndex === 0 && this.selectedIndexPlaces > 0) {
+      this.extractFoodByPlace();
+    } else if (this.selectedIndex > 0 && this.selectedIndexPlaces > 0) {
+      this.extractFoodByCategoryAndPlace();
     }
   }
 
   // backend service Methods
+
+
+  initPlacesDropDown() {
+    this.foodService.getPlaces()
+      .subscribe((result) => {
+        this.places = result;
+      }, (error) => {
+        this.onGetDataError(error);
+      });
+  }
 
   // call service ==> getFoodByBudget
   extractFoodByBudget() {
@@ -97,6 +133,29 @@ export class HomeComponent implements OnInit {
       }, (error) => {
         this.onGetDataError(error);
       });
+  }
+
+  // call service ==> getFoodByplaces
+  extractFoodByPlace() {
+    console.log("food by Place called");
+    console.log(this.places[this.selectedIndexPlaces]);
+    this.foodService.getFoodByPlace(this.budget, this.places[this.selectedIndexPlaces].replace(/ /g, ''))
+      .subscribe((result) => {
+        this.onGetDataSuccess(result);
+      }, (error) => {
+        this.onGetDataError(error);
+      });
+  }
+
+  // call service ==> getFoodByCateroryAndPlaces
+  extractFoodByCategoryAndPlace() {
+    this.foodService.getFoodByCategoryAndPlace(this.budget, this.places[this.selectedIndexPlaces].replace(/ /g, ''), this.categories[this.selectedIndex])
+      .subscribe((result) => {
+        this.onGetDataSuccess(result);
+      }, (error) => {
+        this.onGetDataError(error);
+      });
+    console.log("food by category and Place called");
   }
 
   // what to do with data returned from the service

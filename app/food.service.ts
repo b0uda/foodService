@@ -13,6 +13,7 @@ export class FoodService {
   constructor(private http: HttpClient) {
   }
 
+  // get All food
   getAllFood() {
     let headers = this.createRequestHeader();
 
@@ -21,6 +22,14 @@ export class FoodService {
 
   }
 
+  getPlaces() {
+    let headers = this.createRequestHeader();
+
+    return this.http.get(`${this.serverUrl}places`, { headers: headers })
+      .map(res => res);
+  }
+
+  // get food by budget
   getFoodByBudget(budget: number) {
     let headers = this.createRequestHeader();
 
@@ -29,10 +38,29 @@ export class FoodService {
 
   }
 
+  // get food by category
   getFoodByCategory(budget: number, category: string) {
     let headers = this.createRequestHeader();
 
     return this.http.get(`${this.serverUrl}categoryFood/${budget}/${category}`, { headers: headers })
+      .map(res => res);
+
+  }
+
+  // get food by place
+  getFoodByPlace(budget: number, place: string) {
+    let headers = this.createRequestHeader();
+
+    return this.http.get(`${this.serverUrl}placeFood/${budget}/${place}`, { headers: headers })
+      .map(res => res);
+
+  }
+
+  // get food by category and place
+  getFoodByCategoryAndPlace(budget: number, place: string, category: string) {
+    let headers = this.createRequestHeader();
+
+    return this.http.get(`${this.serverUrl}categoryAndPlaceFood/${budget}/${category}/${place}`, { headers: headers })
       .map(res => res);
 
   }
