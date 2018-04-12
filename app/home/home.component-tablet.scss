@@ -1,23 +1,16 @@
-.food-category {
-    // width: 10%;
-    // height: 10%;
-    // background-color: yellow;
+.tablet .form {
+    margin-top: 4%;
 }
 
-.tablet {}
-
-.tablet .form .form-item {
-    width: 20%;
+.tablet .logo {
+    width: 15%;
+    height: 70dpi;
     margin-left: 2%;
 }
 
-.tablet .form .btn {
-    background-color: peru;
-    color: wheat;
-    margin-top: 5%;
-}
-
 .tablet .form TextField {
+    width: 15%;
+    margin-left: 2%;
     text-align: center;
     font-size: 22;
 }
@@ -25,12 +18,4 @@
 .tablet .form DropDown {
     text-align: center;
     font-size: 22;
-    padding: 5%;
-    margin-top: 5%;
 }
-
-.tablet .form .tablet .category {}
-
-.tablet .name {}
-
-.tablet .title {}

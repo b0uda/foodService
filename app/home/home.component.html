@@ -1,17 +1,18 @@
 <StackLayout #stackLayout>
 
-  <Image class="logo" stretch="fill" src="res://trend"></Image>
 
-  <StackLayout class="form" orientation="horizontal">
-    <TextField class="form-item" hint="What is ur budget" (textChange)="onBudgetChange($event)" [(ngModel)]="budget"></TextField>
+  <FlexBoxLayout class="form" orientation="horizontal">
 
-    <DropDown class="form-item" #dd [items]="categories" [(ngModel)]="selectedIndex" (selectedIndexChanged)="onchange($event)"
-      (opened)="onopen()" (closed)="onclose()"></DropDown>
+    <Image class="logo" stretch="fill" src="res://food_logo"></Image>
+    <TextField hint="What is ur budget" (textChange)="onBudgetChange($event)" [(ngModel)]="budget"></TextField>
 
-    <DropDown class="form-item" #ddp [items]="places" [(ngModel)]="selectedIndexPlaces" (selectedIndexChanged)="onPlaceschange($event)"
-      (opened)="onPlacesOpen()" (closed)="onPlacesClose()"></DropDown>
+    <DropDown #dd [items]="categories" [(ngModel)]="selectedIndex" (selectedIndexChanged)="onchange($event)" (opened)="onopen()"
+      (closed)="onclose()"></DropDown>
 
-  </StackLayout>
+    <DropDown #ddp [items]="places" [(ngModel)]="selectedIndexPlaces" (selectedIndexChanged)="onPlaceschange($event)" (opened)="onPlacesOpen()"
+      (closed)="onPlacesClose()"></DropDown>
+
+  </FlexBoxLayout>
 
   <StackLayout class="result">
     <ListView [items]="foodList" (itemTap)="onItemTap($event)" class="list-group">
