@@ -3,6 +3,7 @@ import { FoodService, Food } from '../food.service';
 import * as platformModule from "tns-core-modules/platform";
 import { StackLayout } from "ui/layouts/stack-layout";
 
+import { TextField } from "ui/text-field";
 
 import { DeviceType } from "ui/enums";
 import { device } from "platform";
@@ -23,6 +24,8 @@ export class HomeComponent implements OnInit {
   foodList: Array<Food>;
   result: string;
 
+  errorNaN;
+
   // DropDown Categories Attributes
   selectedIndex = 0;
   categories: Array<string>;
@@ -38,6 +41,24 @@ export class HomeComponent implements OnInit {
   constructor(private foodService: FoodService) {
     this.budget = 25;
     this.categories = ["All", "burger", "tacos", "pizza", "sandwich", "pasta"];
+  }
+
+  onBudgetChange(args) {
+    let textField: TextField = <TextField>args.object;
+
+
+    //setTimeOut hack because this.budget doesnt update before textChanged method
+    setTimeout(() => {
+      if (isNaN(this.budget)) {
+        this.budget = 25;
+        this.errorNaN = true;
+      }
+      console.log(this.budget);
+      this.loadFood();
+    }, 100);
+
+
+
   }
 
   // DropDown Category Menu Methods
@@ -83,6 +104,8 @@ export class HomeComponent implements OnInit {
     // Load food App first load
     this.loadFood();
   }
+
+
 
   // Load Food Method
   loadFood() {

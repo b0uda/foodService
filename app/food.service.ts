@@ -8,7 +8,7 @@ import "rxjs/add/operator/do";
 export class FoodService {
 
 
-  private serverUrl = "http://192.168.1.2:3000/";
+  private serverUrl = "http://10.0.2.2:3000/";
 
   constructor(private http: HttpClient) {
   }

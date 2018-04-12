@@ -3,16 +3,13 @@
   <Image class="logo" stretch="fill" src="res://trend"></Image>
 
   <StackLayout class="form" orientation="horizontal">
-    <TextField class="form-item" hint="What is ur budget" [(ngModel)]="budget"></TextField>
+    <TextField class="form-item" hint="What is ur budget" (textChange)="onBudgetChange($event)" [(ngModel)]="budget"></TextField>
 
     <DropDown class="form-item" #dd [items]="categories" [(ngModel)]="selectedIndex" (selectedIndexChanged)="onchange($event)"
       (opened)="onopen()" (closed)="onclose()"></DropDown>
 
     <DropDown class="form-item" #ddp [items]="places" [(ngModel)]="selectedIndexPlaces" (selectedIndexChanged)="onPlaceschange($event)"
       (opened)="onPlacesOpen()" (closed)="onPlacesClose()"></DropDown>
-
-
-    <Button class="form-item btn" text="load" (tap)="loadFood()"></Button>
 
   </StackLayout>
 
