@@ -1,9 +1,16 @@
-<StackLayout class="container" #stackLayout>
+<StackLayout #stackLayout>
+
+  <ActionBar title="Food Service">
+
+    <ActionItem class="action-bar-item" (tap)="onShare()" ios.systemIcon="9" ios.position="left" android.systemIcon="ic_menu_share"
+      android.position="actionBar"></ActionItem>
+    <ActionItem (tap)="onDelete()" ios.systemIcon="16" ios.position="right" text="delete" android.position="popup"></ActionItem>
+  </ActionBar>
 
 
   <FlexBoxLayout class="form" orientation="horizontal">
 
-    <Image class="logo" stretch="fill" src="res://food_logo"></Image>
+    <Image class="logo" stretch="fill" src="res://food_logo_blue"></Image>
     <TextField hint="What is ur budget" (textChange)="onBudgetChange($event)" [(ngModel)]="budget"></TextField>
 
     <DropDown #dd [items]="categories" [(ngModel)]="selectedIndex" (selectedIndexChanged)="onchange($event)" (opened)="onopen()"
@@ -19,18 +26,28 @@
 
 
 
-
   <StackLayout class="result">
-    <ListView [items]="foodList" separatorColor="yellow" (itemTap)="onItemTap($event)" class="list-group">
 
+    <StackLayout class="header" orientation="horizontal">
+      <Label class="header-item" text="type" textWrap="true"></Label>
+      <Label class="header-item" text="name" textWrap="true"></Label>
+      <Label class="header-item" text="price" textWrap="true"></Label>
+      <Label class="header-item" text="place" textWrap="true"></Label>
+    </StackLayout>
+
+
+
+
+    <ListView [items]="foodList" separatorColor="#9c9c9c" (itemTap)="onItemTap($event)" class="list-group">
 
 
       <ng-template let-food="item" let-i="index" let-odd="odd" let-even="even">
+
         <GridLayout [class.even]="even" [class.odd]="odd" columns="*,*,*,*" rows="*" class="list-group-item">
           <Image horizontalAlignment="left" class="category" row="0" col="0" [src]="'res://'+food.category"></Image>
-          <Label horizontalAlignment="left" class="name" row="0" col="1" [text]="food.name"></Label>
-          <Label horizontalAlignment="left" class="price" row="0" col="2" [text]="food.price + 'Dh'"></Label>
-          <Label horizontalAlignment="left" class="place" row="0" col="3" [text]="food.place"></Label>
+          <Label horizontalAlignment="center" class="name" row="0" col="1" [text]="food.name"></Label>
+          <Label horizontalAlignment="center" class="price" row="0" col="2" [text]="food.price + 'Dh'"></Label>
+          <Label horizontalAlignment="center" class="place" row="0" col="3" [text]="food.place"></Label>
         </GridLayout>
       </ng-template>
 

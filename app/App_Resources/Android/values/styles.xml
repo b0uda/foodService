@@ -18,15 +18,14 @@
         <item name="colorPrimary">@color/ns_primary</item>
         <item name="colorPrimaryDark">@color/ns_primaryDark</item>
         <item name="colorAccent">@color/ns_accent</item>
-        <item name="colorControlNormal">@color/ns_accent</item>
-        <item name="colorControlActivated">@color/ns_accent</item>
-        <item name="colorControlHighlight">@color/ns_accent</item>
+        <item name="colorControlNormal">#1871b9</item>
+        <item name="colorControlActivated">#1871b9</item>
+        <item name="colorControlHighlight">#1871b9</item>
     </style>
     <style name="AppTheme" parent="AppThemeBase"></style>
     <!-- theme for action-bar -->
     <style name="NativeScriptToolbarStyleBase" parent="Widget.AppCompat.Toolbar">
         <item name="android:background">@color/ns_primary</item>
-        <item name="android:color">#ffffff</item>
         <item name="theme">@style/ThemeOverlay.AppCompat.ActionBar</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat</item>
     </style>

@@ -25,9 +25,18 @@
     width: 30%;
 }
 
-.tablet .list-group-item {
+.tablet .header {
     background-color: #3489db;
     color: white;
+    border-radius: 3;
+    padding-top: 3dpi;
+    padding-bottom: 3dpi;
+    text-align: center;
+    padding: 10dpi 0dpi;
+}
+
+.tablet .header-item {
+    width: 25%;
 }
 
 .tablet CardView {

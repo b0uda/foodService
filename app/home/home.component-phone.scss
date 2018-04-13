@@ -1,8 +1,9 @@
+.phone {}
+
 .phone .form {
     // margin-top: 4%;
-    background-color: #FFE71B;
-    padding-top: 10dpi;
-    padding-bottom: 10dpi;
+    padding-top: 30dpi;
+    padding-bottom: 30dpi; // background-color: #FF0000;
 }
 
 .phone .logo {
@@ -13,7 +14,7 @@
 
 .phone .form TextField {
     width: 15%;
-    margin-left: 2%;
+    margin-left: 5%;
     text-align: center;
     font-size: 22;
 }
@@ -21,23 +22,19 @@
 .phone .form DropDown {
     text-align: center;
     font-size: 22;
+    width: 30%;
 }
 
-.phone .cardStyle {
+.phone .header {
     background-color: #3489db;
-    color: #fff;
-    width: 80%;
-    height: 70dpi;
+    color: white;
+    border-radius: 3;
+    padding-top: 3dpi;
+    padding-bottom: 3dpi;
+    text-align: center;
+    padding: 10dpi 0dpi;
 }
 
-// .phone .odd {
-//     background-color: #8B0CE8;
-// }
-// .phone .even {
-//     background-color: #0D68FF;
-// }
-.phone .form .phone .category {}
-
-.phone .name {}
-
-.phone .title {}
+.phone .header-item {
+    width: 25%;
+}

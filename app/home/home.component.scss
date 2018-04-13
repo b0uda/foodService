@@ -1,5 +1,14 @@
 @import "./home.component-tablet.scss";
 @import "./home.component-phone.scss";
+.phone,
+.tablet {
+    font-family: "Roboto-Regular";
+}
+
+ActionBar {
+    color: white;
+}
+
 ListView {
     height: 100%;
 }
