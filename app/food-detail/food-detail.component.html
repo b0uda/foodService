@@ -1,4 +1,51 @@
-<StackLayout>
-  <Label class="h1 title"
-    text="food-detail Is working"></Label>
+<StackLayout #stackLayout>
+
+  <ActionBar title="Food Service">
+
+    <ActionItem class="action-bar-item" (tap)="onShare()" ios.systemIcon="9" ios.position="left" android.systemIcon="ic_menu_share"
+      android.position="actionBar"></ActionItem>
+    <ActionItem (tap)="onDelete()" ios.systemIcon="16" ios.position="right" text="delete" android.position="popup"></ActionItem>
+  </ActionBar>
+
+
+
+
+  <CardView class="foodCard" margin="10" elevation="40" radius="1">
+    <StackLayout>
+      <Label class="text-left food_name" horizontalAlignment="left" [text]="food.name" textWrap="true"></Label>
+      <Image class="food_img" horizontalAlignment="left" src="res://buger_test" stretch="fill"></Image>
+
+      <StackLayout orientation="horizontal">
+        <StackLayout class="foodInfo">
+          <Label class="food_price text-left" [text]="'Price : ' + food.price + 'Dh'"></Label>
+          <Label class="food_comp text-left" text="ingredient: Beef"></Label>
+
+        </StackLayout>
+
+        <StackLayout class="placeInfo">
+          <Label class="food_place" [text]="food.place" textWrap="true"></Label>
+
+          <Label class="food_place_open" text="open : 8-16"></Label>
+          <Label class="food_place_call" text="Call"></Label>
+
+        </StackLayout>
+
+      </StackLayout>
+
+      <StackLayout orientation="horizontal">
+        <Button class="btn" text="upload image"></Button>
+        <Button class="btn" text="take image"></Button>
+      </StackLayout>
+
+
+
+    </StackLayout>
+
+  </CardView>
+
+
+
+
+
+
 </StackLayout>

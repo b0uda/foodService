@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FoodService, Food } from '../food.service';
 import * as platformModule from "tns-core-modules/platform";
-import { StackLayout } from "ui/layouts/stack-layout";
 
+import { StackLayout } from "ui/layouts/stack-layout";
+import { GridLayout } from "ui/layouts/grid-layout";
+import { ItemEventData } from "ui/list-view";
 import { TextField } from "ui/text-field";
 
 import { DeviceType } from "ui/enums";
@@ -10,6 +12,7 @@ import { device } from "platform";
 import { Page } from "ui/page";
 
 import { SelectedIndexChangedEventData } from "nativescript-drop-down";
+import { RouterExtensions } from 'nativescript-angular/router';
 
 
 @Component({
@@ -24,6 +27,7 @@ export class HomeComponent implements OnInit {
   budget: number;
   foodList: Array<Food>;
   result: string;
+  foodSelected: GridLayout;
 
   errorNaN;
 
@@ -39,15 +43,32 @@ export class HomeComponent implements OnInit {
   @ViewChild("stackLayout") stackLayout: ElementRef;
 
   // Constructor
-  constructor(private foodService: FoodService) {
+  constructor(private foodService: FoodService, private routerExtensions: RouterExtensions) {
     this.budget = 25;
     this.categories = ["All", "burger", "tacos", "pizza", "sandwich", "pasta"];
 
   }
 
+  // When user click on item food
+  public onItemTap(args: ItemEventData) {
+
+    this.foodSelected = <GridLayout>args.view;
+
+    console.log(this.foodSelected.id);
+
+    this.routerExtensions.navigate(["/details", this.foodSelected.id], {
+      transition: {
+        name: "explode",
+        duration: 300,
+        curve: "spring"
+      }
+    });
+
+  }
+
+  // Budget TextView Change load FoodsList again
   onBudgetChange(args) {
     let textField: TextField = <TextField>args.object;
-
 
     //setTimeOut hack because this.budget doesnt update before textChanged method
     setTimeout(() => {
@@ -58,8 +79,6 @@ export class HomeComponent implements OnInit {
       console.log(this.budget);
       this.loadFood();
     }, 100);
-
-
 
   }
 

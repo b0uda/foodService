@@ -43,7 +43,7 @@
 
       <ng-template let-food="item" let-i="index" let-odd="odd" let-even="even">
 
-        <GridLayout [class.even]="even" [class.odd]="odd" columns="*,*,*,*" rows="*" class="list-group-item">
+        <GridLayout [id]="food.id" [class.even]="even" [class.odd]="odd" columns="*,*,*,*" rows="*" class="list-group-item">
           <Image horizontalAlignment="left" class="category" row="0" col="0" [src]="'res://'+food.category"></Image>
           <Label horizontalAlignment="center" class="name" row="0" col="1" [text]="food.name"></Label>
           <Label horizontalAlignment="center" class="price" row="0" col="2" [text]="food.price + 'Dh'"></Label>

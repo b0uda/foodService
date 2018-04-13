@@ -22,6 +22,14 @@ export class FoodService {
 
   }
 
+  getFoodById(id: number) {
+    let headers = this.createRequestHeader();
+
+    return this.http.get(`${this.serverUrl}food/${id}`, { headers: headers })
+      .map(res => res);
+
+  }
+
   getPlaces() {
     let headers = this.createRequestHeader();
 

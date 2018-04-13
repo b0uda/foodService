@@ -13,7 +13,11 @@ import { DropDownModule } from "nativescript-drop-down/angular";
 import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
 
 import * as elementRegistryModule from 'nativescript-angular/element-registry';
+import { FoodDetailComponent } from "./food-detail/food-detail.component";
 elementRegistryModule.registerElement("CardView", () => require("nativescript-cardview").CardView);
+
+import { registerElement } from 'nativescript-angular/element-registry';
+registerElement('StarRating', () => require('nativescript-star-ratings').StarRating);
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
 // import { NativeScriptFormsModule } from "nativescript-angular/forms";
@@ -32,10 +36,12 @@ elementRegistryModule.registerElement("CardView", () => require("nativescript-ca
         DropDownModule,
         NativeScriptHttpClientModule,
 
+
     ],
     declarations: [
         AppComponent,
         HomeComponent,
+        FoodDetailComponent,
     ],
     providers: [
         FoodService
