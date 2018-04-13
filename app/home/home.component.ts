@@ -11,6 +11,7 @@ import { Page } from "ui/page";
 
 import { SelectedIndexChangedEventData } from "nativescript-drop-down";
 
+
 @Component({
   moduleId: module.id,
   selector: 'app-home',
@@ -41,6 +42,7 @@ export class HomeComponent implements OnInit {
   constructor(private foodService: FoodService) {
     this.budget = 25;
     this.categories = ["All", "burger", "tacos", "pizza", "sandwich", "pasta"];
+
   }
 
   onBudgetChange(args) {

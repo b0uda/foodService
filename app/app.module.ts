@@ -12,6 +12,8 @@ import { DropDownModule } from "nativescript-drop-down/angular";
 
 import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
 
+import * as elementRegistryModule from 'nativescript-angular/element-registry';
+elementRegistryModule.registerElement("CardView", () => require("nativescript-cardview").CardView);
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
 // import { NativeScriptFormsModule } from "nativescript-angular/forms";

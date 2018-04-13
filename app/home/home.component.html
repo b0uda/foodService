@@ -1,4 +1,4 @@
-<StackLayout #stackLayout>
+<StackLayout class="container" #stackLayout>
 
 
   <FlexBoxLayout class="form" orientation="horizontal">
@@ -12,18 +12,29 @@
     <DropDown #ddp [items]="places" [(ngModel)]="selectedIndexPlaces" (selectedIndexChanged)="onPlaceschange($event)" (opened)="onPlacesOpen()"
       (closed)="onPlacesClose()"></DropDown>
 
+
+
+
   </FlexBoxLayout>
 
+
+
+
   <StackLayout class="result">
-    <ListView [items]="foodList" (itemTap)="onItemTap($event)" class="list-group">
+    <ListView [items]="foodList" separatorColor="yellow" (itemTap)="onItemTap($event)" class="list-group">
+
+
+
       <ng-template let-food="item" let-i="index" let-odd="odd" let-even="even">
-        <GridLayout columns="*,*,*,*" rows="*" class="list-group-item">
+        <GridLayout [class.even]="even" [class.odd]="odd" columns="*,*,*,*" rows="*" class="list-group-item">
           <Image horizontalAlignment="left" class="category" row="0" col="0" [src]="'res://'+food.category"></Image>
           <Label horizontalAlignment="left" class="name" row="0" col="1" [text]="food.name"></Label>
           <Label horizontalAlignment="left" class="price" row="0" col="2" [text]="food.price + 'Dh'"></Label>
           <Label horizontalAlignment="left" class="place" row="0" col="3" [text]="food.place"></Label>
         </GridLayout>
       </ng-template>
+
+
     </ListView>
   </StackLayout>
 

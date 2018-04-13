@@ -1,5 +1,9 @@
+.tablet {}
+
 .tablet .form {
-    margin-top: 4%;
+    // margin-top: 4%;
+    padding-top: 30dpi;
+    padding-bottom: 30dpi; // background-color: #FF0000;
 }
 
 .tablet .logo {
@@ -10,7 +14,7 @@
 
 .tablet .form TextField {
     width: 15%;
-    margin-left: 2%;
+    margin-left: 5%;
     text-align: center;
     font-size: 22;
 }
@@ -18,4 +22,16 @@
 .tablet .form DropDown {
     text-align: center;
     font-size: 22;
+    width: 30%;
+}
+
+.tablet .list-group-item {
+    background-color: #3489db;
+    color: white;
+}
+
+.tablet CardView {
+    background-color: #3489db;
+    color: #fff;
+    width: 40%;
 }
