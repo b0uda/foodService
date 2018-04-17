@@ -107,6 +107,23 @@ export class FoodDetailComponent implements OnInit {
         var image = new imageModule.Image();
         image.src = imageAsset;
 
+        console.log(image.src.android);
+
+        let file_url: string = image.src.android;
+
+        // upload picture captured
+        var request = {
+          url: "http://192.168.1.2:3030",
+          method: "POST",
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "File-Name": `test.jpg`
+          },
+          description: "{ 'uploading': " + "Test.jpg" + " }"
+        };
+
+        var task = session.uploadFile(file_url, request)
+
       }).catch(function (err) {
         console.log("Error -> " + err.message);
       });
@@ -114,35 +131,49 @@ export class FoodDetailComponent implements OnInit {
 
   uploadPicture() {
 
+    let file_url: string;
 
-    // // image picker
-    // let context = imagepicker.create({
-    //   mode: "single" // use "multiple" for multiple selection
-    // });
+    // image picker
+    let context = imagepicker.create({
+      mode: "single" // use "multiple" for multiple selection
+    });
 
-    // context
-    //   .authorize()
-    //   .then(function () {
-    //     return context.present();
-    //   })
-    //   .then(function (selection) {
+    context
+      .authorize()
+      .then(function () {
+        return context.present();
+      })
+      .then(function (selection) {
 
-    //     console.log("Selection done: " + JSON.stringify(selection));
-    //     console.log(selection[0].android);
+        console.log("Selection done: " + JSON.stringify(selection));
+        console.log(selection[0].android);
 
-    //     selection.forEach(function (selected) {
-    //       // process the selected image
+        file_url = selection[0].android;
 
-    //     });
-    //     this.list.items = selection;
-    //   }).catch(function (e) {
-    //     // process error
-    //     console.log(e);
-    //   });
+        var request = {
+          url: "http://192.168.1.2:3030",
+          method: "POST",
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "File-Name": `test.jpg`
+          },
+          description: "{ 'uploading': " + "Test.jpg" + " }"
+        };
+
+        var task = session.uploadFile(file_url, request)
+
+        selection.forEach(function (selected) {
+          // process the selected image
 
 
 
-    this.uploadFile("/storage/emulated/0/DCIM/Camera/NSIMG_20180417_105111.jpg");
+        });
+
+      }).catch(function (e) {
+        // process error
+        console.log(e);
+      });
+
 
 
 
@@ -150,26 +181,42 @@ export class FoodDetailComponent implements OnInit {
 
   // Upload Image
   uploadFile(file: string) {
-    var documents = fs.knownFolders.documents();
-    console.dir(documents.getEntities);
+    // var documents = fs.knownFolders.documents();
+
+
 
     var request = {
-      url: "http://10.0.2.2:3030/upload",
+      url: "http://192.168.1.2:3030",
       method: "POST",
       headers: {
-        "Content-Type": "application/octet-stream",
-        "File-Name": "nametest"
+        "Content-Type": "multipart/form-data",
+        "File-Name": `${this.food.id}_${this.food.name}_${this.food.place}.jpg`
       },
-      description: "desctest",
-      androidDisplayNotificationProgress: true
+      description: "{ 'uploading': " + "Test.jpg" + " }"
     };
 
+    var task = session.uploadFile(file, request)
+    task.on("progress", this.logEvent);
+    task.on("error", this.logEvent);
+    task.on("complete", this.logEvent);
 
-    let task: bghttp.Task;
-    task = session.uploadFile(file, request);
-    console.dir(task.status.toString);
+
+
+
 
 
   }
+
+
+  logEvent(e) {
+    console.log("----------------");
+    console.log('Status: ' + e.eventName);
+    // console.log(e.object);
+    if (e.totalBytes !== undefined) {
+      console.log('current bytes transfered: ' + e.currentBytes);
+      console.log('Total bytes to transfer: ' + e.totalBytes);
+    }
+  }
+
 
 }
