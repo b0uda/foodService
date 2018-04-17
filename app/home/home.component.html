@@ -8,6 +8,10 @@
   </ActionBar>
 
 
+
+
+
+
   <FlexBoxLayout class="form" orientation="horizontal">
 
     <Image class="logo" stretch="fill" src="res://food_logo_blue"></Image>
@@ -44,9 +48,10 @@
       <ng-template let-food="item" let-i="index" let-odd="odd" let-even="even">
 
         <GridLayout [id]="food.id" [class.even]="even" [class.odd]="odd" columns="*,*,*,*" rows="*" class="list-group-item">
-          <Image horizontalAlignment="left" class="category" row="0" col="0" [src]="'res://'+food.category"></Image>
+          <Label horizontalAlignment="center" row="0" col="0" class="category" [text]="getIcon(food.category)" class="food-icon" textWrap="true"></Label>
           <Label horizontalAlignment="center" class="name" row="0" col="1" [text]="food.name"></Label>
-          <Label horizontalAlignment="center" class="price" row="0" col="2" [text]="food.price + 'Dh'"></Label>
+          <Label horizontalAlignment="center" class="price" row="0" col="2" [text]="food.price"></Label>
+          <Label horizontalAlignment="center" row="0" col="2" text="a" class="icon"></Label>
           <Label horizontalAlignment="center" class="place" row="0" col="3" [text]="food.place"></Label>
         </GridLayout>
       </ng-template>

@@ -1,5 +1,3 @@
-@import "./food-detail.component-tablet.scss";
-@import "./food-detail.component-phone.scss";
 .phone,
 .tablet {
     font-family: "Roboto-Regular";
@@ -29,6 +27,7 @@ ActionBar {
 .foodInfo,
 .placeInfo {
     width: 50%;
+    font-size: 26;
 }
 
 .foodInfo {
@@ -48,21 +47,29 @@ StarRating {
 }
 
 .placeInfo {
-    margin-top: 2dpi;
+    margin-top: 15dpi;
 }
 
 .food_comp {
     margin-top: 5dpi;
 }
 
-.food_place {
+.section_title {
     text-align: center;
-    font-size: 26;
     color: #3489db;
+    font-size: 28;
+    margin-bottom: 5dpi;
 }
 
 .food_place_open,
-.food_place_call {
+.food_place_call,
+.food_place_name {
     text-align: right;
     margin-right: 20dpi;
+}
+
+@import "./food-detail.component-tablet.scss";
+@import "./food-detail.component-phone.scss";
+ListView {
+    width: 50%;
 }

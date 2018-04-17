@@ -1,5 +1,19 @@
 .tablet {}
 
+.tablet .icon {
+    font-family: "icons";
+    font-size: 22;
+    color: #3489db;
+    margin-left: 5%;
+    transform: rotate(10deg);
+}
+
+.food-icon {
+    font-family: "food";
+    font-size: 62;
+    color: #3489db;
+}
+
 .tablet .form {
     // margin-top: 4%;
     padding-top: 30dpi;
@@ -28,19 +42,20 @@
 .tablet .header {
     background-color: #3489db;
     color: white;
+    font-family: "Roboto-Bold";
     border-radius: 3;
-    padding-top: 3dpi;
-    padding-bottom: 3dpi;
     text-align: center;
-    padding: 10dpi 0dpi;
+    padding: 20dpi 0dpi;
+    font-size: 26;
 }
 
 .tablet .header-item {
     width: 25%;
+    font-size: 22;
 }
 
-.tablet CardView {
-    background-color: #3489db;
-    color: #fff;
-    width: 40%;
+.tablet ListView .odd {
+    background-color: #F5F5F5;
 }
+
+.tablet ListView .category {}

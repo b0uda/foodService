@@ -49,6 +49,26 @@ export class HomeComponent implements OnInit {
 
   }
 
+
+  getIcon(category: string) {
+    switch (category) {
+      case "burger":
+        return "r";
+      case "tacos":
+        return "E";
+      case "pizza":
+        return "j";
+      case "sandwich":
+        return "g";
+      case "pasta":
+        return "t";
+
+
+      default:
+        break;
+    }
+  }
+
   // When user click on item food
   public onItemTap(args: ItemEventData) {
 
@@ -59,8 +79,8 @@ export class HomeComponent implements OnInit {
     this.routerExtensions.navigate(["/details", this.foodSelected.id], {
       transition: {
         name: "explode",
-        duration: 300,
-        curve: "spring"
+        duration: 600,
+        curve: "easeInOut"
       }
     });
 
