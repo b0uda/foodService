@@ -33,7 +33,6 @@ export class FoodDetailComponent implements OnInit {
   foodId;
   food: Food;
 
-
   // camera
 
   public imageTaken: ImageAsset;
@@ -41,6 +40,7 @@ export class FoodDetailComponent implements OnInit {
   public keepAspectRatio: boolean = true;
   public width: number = 300;
   public height: number = 300;
+  img_src = "";
 
   // DOM Element Reference
   @ViewChild("stackLayout") stackLayout: ElementRef;
@@ -63,6 +63,10 @@ export class FoodDetailComponent implements OnInit {
     _stackLayout.className = _deviceType.toLowerCase();
     console.log(_deviceType);
 
+    this.list = <ListView>this._list.nativeElement;
+
+    // Get Image from Url
+    let img = <Image>this.image.nativeElement;
 
 
     console.dir();
@@ -70,6 +74,26 @@ export class FoodDetailComponent implements OnInit {
       .subscribe((result) => {
         console.log(result);
         this.food = <Food>result;
+
+        console.log(`http://192.168.1.2:3030/getImage/${this.food.id}_${this.food.name.replace(/ /g, '')}_${this.food.place.replace(/ /g, '')}`);
+
+        http.getString(`http://192.168.1.2:3030/getImage/${this.food.id}_${this.food.name.replace(/ /g, '')}_${this.food.place.replace(/ /g, '')}`).then((r) => {
+          //// Argument (r) is string!
+
+          http.getImage(`http://192.168.1.2:3030/uploads/${r}`).then((r) => {
+            // Argument (r) is ImageSource!
+            img.imageSource = r;
+            console.log(r);
+          }, (err) => {
+            // Argument (e) is Error!
+            console.log(err);
+          });
+
+          console.log(`http://192.168.1.2:3030/uploads/${r}`);
+        }, function (e) {
+          //// Argument (e) is Error!
+        });
+
       }, (error) => {
         console.log(`error : ${error}`);
       });
@@ -78,22 +102,9 @@ export class FoodDetailComponent implements OnInit {
 
 
 
-    this.list = <ListView>this._list.nativeElement;
 
 
 
-
-
-    // Get Image from Url
-    let img = <Image>this.image.nativeElement;
-    http.getImage("https://image.ibb.co/i9Lrp7/4.jpg").then((r) => {
-
-      img.imageSource = r;
-      // img.src = "res://dh";
-
-    }, (err) => {
-      // Argument (e) is Error!
-    });
   }
 
   // Take Picture
@@ -102,7 +113,7 @@ export class FoodDetailComponent implements OnInit {
     camera.requestPermissions();
 
     camera.takePicture()
-      .then(function (imageAsset) {
+      .then((imageAsset) => {
         console.log("Result is an image asset instance");
         var image = new imageModule.Image();
         image.src = imageAsset;
@@ -111,18 +122,13 @@ export class FoodDetailComponent implements OnInit {
 
         let file_url: string = image.src.android;
 
-        // upload picture captured
-        var request = {
-          url: "http://192.168.1.2:3030",
-          method: "POST",
-          headers: {
-            "Content-Type": "multipart/form-data",
-            "File-Name": `test.jpg`
-          },
-          description: "{ 'uploading': " + "Test.jpg" + " }"
-        };
+        let file = image.src.android.split(".");
+        console.dir(file);
 
-        var task = session.uploadFile(file_url, request)
+        // file_url = selection[0].android;
+
+        this.uploadFile(file[0], file[1]);
+
 
       }).catch(function (err) {
         console.log("Error -> " + err.message);
@@ -140,32 +146,22 @@ export class FoodDetailComponent implements OnInit {
 
     context
       .authorize()
-      .then(function () {
+      .then(() => {
         return context.present();
       })
-      .then(function (selection) {
+      .then((selection) => {
 
         console.log("Selection done: " + JSON.stringify(selection));
         console.log(selection[0].android);
+        let file = selection[0].android.split(".");
+        console.dir(file);
 
-        file_url = selection[0].android;
+        // file_url = selection[0].android;
 
-        var request = {
-          url: "http://192.168.1.2:3030",
-          method: "POST",
-          headers: {
-            "Content-Type": "multipart/form-data",
-            "File-Name": `test.jpg`
-          },
-          description: "{ 'uploading': " + "Test.jpg" + " }"
-        };
-
-        var task = session.uploadFile(file_url, request)
+        this.uploadFile(file[0], file[1]);
 
         selection.forEach(function (selected) {
           // process the selected image
-
-
 
         });
 
@@ -174,39 +170,28 @@ export class FoodDetailComponent implements OnInit {
         console.log(e);
       });
 
-
-
-
   }
 
   // Upload Image
-  uploadFile(file: string) {
+  uploadFile(file_name: string, file_ext: string) {
     // var documents = fs.knownFolders.documents();
 
-
-
     var request = {
-      url: "http://192.168.1.2:3030",
+      url: "http://192.168.1.2:3030/upload",
       method: "POST",
       headers: {
-        "Content-Type": "multipart/form-data",
-        "File-Name": `${this.food.id}_${this.food.name}_${this.food.place}.jpg`
+
+        "File-Name": `${this.food.id}_${this.food.name}_${this.food.place}.${file_ext}`
       },
       description: "{ 'uploading': " + "Test.jpg" + " }"
     };
 
-    var task = session.uploadFile(file, request)
+    var task = session.uploadFile(`${file_name}.${file_ext}`, request)
     task.on("progress", this.logEvent);
     task.on("error", this.logEvent);
     task.on("complete", this.logEvent);
 
-
-
-
-
-
   }
-
 
   logEvent(e) {
     console.log("----------------");
@@ -217,6 +202,5 @@ export class FoodDetailComponent implements OnInit {
       console.log('Total bytes to transfer: ' + e.totalBytes);
     }
   }
-
 
 }

@@ -12,7 +12,7 @@
   <CardView class="foodCard" margin="10" elevation="40" radius="1">
     <StackLayout>
       <Label class="text-left food_name" horizontalAlignment="left" [text]="food.name" textWrap="true"></Label>
-      <Image #img class="food_img" horizontalAlignment="left" src="" stretch="fill"></Image>
+      <Image #img class="food_img" horizontalAlignment="left" [src]="img_src" stretch="fill"></Image>
 
       <StackLayout orientation="horizontal">
         <StackLayout class="foodInfo">
