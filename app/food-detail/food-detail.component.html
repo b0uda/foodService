@@ -34,7 +34,9 @@
 
       </StackLayout>
 
-      <StackLayout orientation="horizontal">
+
+
+      <StackLayout *ngIf="!hasImage" orientation="horizontal">
         <Button (tap)="uploadPicture()" class="btn" text="upload image"></Button>
         <Button (tap)="takePicture()" class="btn" text="take image"></Button>
       </StackLayout>

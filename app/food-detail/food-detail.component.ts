@@ -32,6 +32,8 @@ export class FoodDetailComponent implements OnInit {
 
   foodId;
   food: Food;
+  server = "http://192.168.1.4:3030/";
+  hasImage = false;
 
   // camera
 
@@ -75,23 +77,27 @@ export class FoodDetailComponent implements OnInit {
         console.log(result);
         this.food = <Food>result;
 
-        console.log(`http://192.168.1.2:3030/getImage/${this.food.id}_${this.food.name.replace(/ /g, '')}_${this.food.place.replace(/ /g, '')}`);
+        // console.log(`${this.server}getImage/${this.food.id}_${this.food.name.replace(/ /g, '')}_${this.food.place.replace(/ /g, '')}`);
 
-        http.getString(`http://192.168.1.2:3030/getImage/${this.food.id}_${this.food.name.replace(/ /g, '')}_${this.food.place.replace(/ /g, '')}`).then((r) => {
+        http.getString(`${this.server}getImage/${this.food.id}_${this.food.name.replace(/ /g, '')}_${this.food.place.replace(/ /g, '')}`).then((r) => {
           //// Argument (r) is string!
 
-          http.getImage(`http://192.168.1.2:3030/uploads/${r}`).then((r) => {
+
+
+          http.getImage(`${this.server}uploads/${r}`).then((r) => {
             // Argument (r) is ImageSource!
             img.imageSource = r;
+            this.hasImage = true;
             console.log(r);
           }, (err) => {
             // Argument (e) is Error!
             console.log(err);
           });
 
-          console.log(`http://192.168.1.2:3030/uploads/${r}`);
+          // console.log(`http://192.168.1.4:3030/uploads/${r}`);
         }, function (e) {
           //// Argument (e) is Error!
+
         });
 
       }, (error) => {
@@ -177,7 +183,7 @@ export class FoodDetailComponent implements OnInit {
     // var documents = fs.knownFolders.documents();
 
     var request = {
-      url: "http://192.168.1.2:3030/upload",
+      url: `${this.server}upload`,
       method: "POST",
       headers: {
 
@@ -196,6 +202,7 @@ export class FoodDetailComponent implements OnInit {
   logEvent(e) {
     console.log("----------------");
     console.log('Status: ' + e.eventName);
+    console.dir(e);
     // console.log(e.object);
     if (e.totalBytes !== undefined) {
       console.log('current bytes transfered: ' + e.currentBytes);
