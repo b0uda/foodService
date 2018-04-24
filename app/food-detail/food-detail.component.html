@@ -9,9 +9,10 @@
 
 
 
-  <CardView class="foodCard" margin="10" elevation="40" radius="1">
-    <StackLayout>
+  <CardView class="foodCard" margin="10" elevation="20" radius="1">
+    <StackLayout class="stackCard">
       <Label class="text-left food_name" horizontalAlignment="left" [text]="food.name" textWrap="true"></Label>
+
       <Image #img class="food_img" horizontalAlignment="left" [src]="img_src" stretch="fill"></Image>
 
       <StackLayout orientation="horizontal">
@@ -38,7 +39,7 @@
 
 
 
-      <StackLayout *ngIf="!hasImage" orientation="horizontal">
+      <StackLayout class="btn-container" *ngIf="!hasImage" orientation="horizontal">
         <Button (tap)="uploadPicture()" class="btn" text="upload image"></Button>
         <Button (tap)="takePicture()" class="btn" text="take image"></Button>
       </StackLayout>
@@ -48,6 +49,58 @@
     </StackLayout>
 
   </CardView>
+
+
+  <FlexboxLayout class="top-container">
+    <CardView margin="10" elevation="50" radius="1" class="top">
+      <StackLayout class="top-card-container" orientation="vertical">
+        <Label class="top-name" text="Big Mac" textWrap="true"></Label>
+        <Image stretch="fill" class="top-img" src="res://buger_test"></Image>
+
+        <StackLayout orientation="horizontal">
+          <StackLayout class="top-card-section-price">
+            <Label class="text-left" [text]="food.price + 'Dh'"></Label>
+          </StackLayout>
+
+          <StackLayout class="top-card-section-place text-right">
+            <Label class="" text="tacos de Lyon"></Label>
+          </StackLayout>
+        </StackLayout>
+
+
+      </StackLayout>
+    </CardView>
+    <CardView margin="10" elevation="3" radius="1" class="top">
+      <StackLayout class="top-card-container" orientation="vertical">
+        <Label class="top-name" text="Big Mac" textWrap="true"></Label>
+        <Image stretch="fill" class="top-img" src="res://buger_test"></Image>
+        <StackLayout orientation="horizontal">
+          <StackLayout class="top-card-section-price">
+            <Label class="text-left" [text]="food.price + 'Dh'"></Label>
+          </StackLayout>
+
+          <StackLayout class="top-card-section-place text-right">
+            <Label class="" text="Macdo" textWrap="true"></Label>
+          </StackLayout>
+        </StackLayout>
+      </StackLayout>
+    </CardView>
+    <CardView margin="10" elevation="3" radius="1" class="top">
+      <StackLayout class="top-card-container" orientation="vertical">
+        <Label class="top-name" text="Big Mac" textWrap="true"></Label>
+        <Image stretch="fill" class="top-img" src="res://buger_test"></Image>
+        <StackLayout orientation="horizontal">
+          <StackLayout class="top-card-section-price">
+            <Label class="text-left" [text]="food.price + 'Dh'"></Label>
+          </StackLayout>
+
+          <StackLayout class="top-card-section-place text-right">
+            <Label class="" text="L'Autentik" textWrap="true"></Label>
+          </StackLayout>
+        </StackLayout>
+      </StackLayout>
+    </CardView>
+  </FlexboxLayout>
 
 
   <ListView #list class="list-group">

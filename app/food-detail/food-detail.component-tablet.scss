@@ -1,6 +1,7 @@
 .tablet .foodCard {
     font-size: 20;
     height: 70%;
+    margin-top: 4%;
 }
 
 .tablet .food_name {
@@ -24,4 +25,35 @@
 .tablet .food_name {
     font-size: 52;
     margin-bottom: 5dpi;
+}
+
+.tablet .top-container {
+    width: 100%;
+    height: 23%;
+    margin-top: 2%;
+    padding-bottom: 20dpi;
+}
+
+.tablet .top {
+    width: 32%;
+    height: 100%;
+    font-size: 22;
+}
+
+.tablet .top-name {
+    font-size: 26;
+    color: #3489db;
+}
+
+.tablet .top-img {
+    height: 70%;
+    width: 100%;
+}
+
+.tablet .top-card-section-price {
+    width: 30%;
+}
+
+.tablet .top-card-section-place {
+    width: 70%;
 }

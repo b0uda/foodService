@@ -35,13 +35,6 @@ ActionBar {
     padding-left: 10dpi;
 }
 
-.btn {
-    width: 40%;
-    background-color: #3489db;
-    color: white;
-    margin-left: 5%;
-}
-
 StarRating {
     width: 100%;
 }
@@ -73,3 +66,18 @@ StarRating {
 ListView {
     width: 50%;
 }
+
+.btn-container {
+    padding: 0;
+    margin-top: 5%;
+}
+
+.btn {
+    width: 40%;
+    background-color: #3489db;
+    color: white;
+    margin-left: 5%;
+    height: 50dpi;
+}
+
+.stackCard {}

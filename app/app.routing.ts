@@ -8,7 +8,7 @@ import { FoodDetailComponent } from "./food-detail/food-detail.component";
 
 
 const routes: Routes = [
-    { path: "", redirectTo: "home", pathMatch: "full" },
+    { path: "", redirectTo: "details/10", pathMatch: "full" },
     { path: "home", component: HomeComponent },
     { path: "details/:id", component: FoodDetailComponent }
 
