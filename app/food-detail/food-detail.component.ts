@@ -6,6 +6,7 @@ import * as platformModule from "tns-core-modules/platform";
 import { Image } from "ui/image";
 var http = require("http");
 
+
 import * as bghttp from "nativescript-background-http";
 var session = bghttp.session("image-upload");
 
@@ -21,6 +22,12 @@ import * as fs from "tns-core-modules/file-system";
 
 import { ListView } from "ui/list-view";
 import { selectedIndexProperty } from 'tns-core-modules/ui/list-picker/list-picker';
+
+// require the plugin 
+import { LocateAddress } from "nativescript-locate-address";
+
+// instantiate the plugin 
+let locator = new LocateAddress();
 
 @Component({
   moduleId: module.id,
@@ -56,6 +63,16 @@ export class FoodDetailComponent implements OnInit {
       .forEach((params) => { this.foodId = +params["id"]; });
   }
 
+  findPlace() {
+    locator.locate({
+      lat: 32.0000,
+      lng: -5.0000
+    }).then(() => {
+      console.log("Maps app launched.");
+    }, (error) => {
+      console.log(error);
+    });
+  }
 
   // On Init Component
   ngOnInit() {

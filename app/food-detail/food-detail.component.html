@@ -25,9 +25,11 @@
 
         <StackLayout class="placeInfo">
           <Label class="food_place section_title" text="Where to find it" textWrap="true"></Label>
-          <Label class="food_place_name" [text]="food.place" textWrap="true"></Label>
 
           <Label class="food_place_open" text="open : 8-16"></Label>
+
+          <Label (tap)="findPlace()" class="food_place_name" [text]="food.place" textWrap="true"></Label>
+
           <Label class="food_place_call" text="Call"></Label>
 
         </StackLayout>
