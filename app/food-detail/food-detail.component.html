@@ -17,21 +17,43 @@
 
       <StackLayout orientation="horizontal">
         <StackLayout class="foodInfo">
-          <Label class="food section_title" text="Food details" textWrap="true"></Label>
+          <Label class="food section_title" text="Information" textWrap="true"></Label>
 
-          <Label class="food_price text-left" [text]="'Price : ' + food.price + 'Dh'"></Label>
-          <Label class="food_comp text-left" text="ingredient: Beef"></Label>
+
+
+
+          <GridLayout class="icons-container" horizontalAlignment="left" rows="4dpi,auto ,4pi ,auto" columns="auto">
+
+            <Label col="0" row="1" class="food_price text-left" [text]="'Prix: ' + food.price + ' DH'"></Label>
+            <Label col="0" row="3" class="food_comp text-left" text="ingrédients: Boeuf"></Label>
+
+
+
+          </GridLayout>
 
         </StackLayout>
 
         <StackLayout class="placeInfo">
-          <Label class="food_place section_title" text="Where to find it" textWrap="true"></Label>
+          <Label class="food_place section_title" text="Coordonnées" textWrap="true"></Label>
 
-          <Label class="food_place_open" text="open : 8-16"></Label>
 
-          <Label (tap)="findPlace()" class="food_place_name" [text]="food.place" textWrap="true"></Label>
+          <GridLayout class="icons-container" horizontalAlignment="right" rows="4dpi,auto ,4pi ,auto,4dpi ,auto" columns="auto">
 
-          <Label class="food_place_call" text="Call"></Label>
+            <Label col="0" row="1" class="food_place_open" text="Ouvert : 8-16"></Label>
+            <Label col="0" row="1" horizontalAlignment="right" text="c" class="icon-location"></Label>
+
+
+            <Label col="0" row="3" horizontalAlignment="right" (tap)="findPlace()" class="food_place_name" [text]="food.place" textWrap="true"></Label>
+            <Label col="0" row="3" horizontalAlignment="right" (tap)="findPlace()" text="a" class="icon-location"></Label>
+
+            <Label col="0" row="5" horizontalAlignment="right" class="food_place_call" text="Appeler"></Label>
+            <Label col="0" row="5" horizontalAlignment="right" class="food_place_call" text="b" class="icon-call"></Label>
+
+          </GridLayout>
+
+
+
+
 
         </StackLayout>
 
@@ -40,8 +62,8 @@
 
 
       <StackLayout class="btn-container" *ngIf="!hasImage" orientation="horizontal">
-        <Button (tap)="uploadPicture()" class="btn" text="upload image"></Button>
-        <Button (tap)="takePicture()" class="btn" text="take image"></Button>
+        <Button (tap)="uploadPicture()" class="btn" text="Galerie"></Button>
+        <Button (tap)="takePicture()" class="btn" text="Prendre image"></Button>
       </StackLayout>
 
 

@@ -8,7 +8,7 @@ ActionBar {
 }
 
 .foodCard {
-    height: 90%;
+    height: 94%;
     font-size: 20;
 }
 
@@ -28,6 +28,7 @@ ActionBar {
 .placeInfo {
     width: 50%;
     font-size: 26;
+    margin-top: 5dpi;
 }
 
 .foodInfo {
@@ -58,7 +59,7 @@ StarRating {
 .food_place_call,
 .food_place_name {
     text-align: right;
-    margin-right: 20dpi;
+    margin-right: 40dpi;
 }
 
 @import "./food-detail.component-tablet.scss";
@@ -69,7 +70,6 @@ ListView {
 
 .btn-container {
     padding: 0;
-    margin-top: 5%;
 }
 
 .btn {
@@ -80,4 +80,14 @@ ListView {
     height: 50dpi;
 }
 
-.stackCard {}
+// new
+.top-container {
+    visibility: hidden;
+}
+
+.icon-location,
+.icon-call {
+    font-family: 'icons';
+    font-size: 28;
+    color: #3489db;
+}

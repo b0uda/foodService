@@ -50,8 +50,8 @@
         <GridLayout [id]="food.id" [class.even]="even" [class.odd]="odd" columns="*,*,*,*" rows="*" class="list-group-item">
           <Label horizontalAlignment="center" row="0" col="0" class="category" [text]="getIcon(food.category)" class="food-icon" textWrap="true"></Label>
           <Label horizontalAlignment="center" class="name" row="0" col="1" [text]="food.name"></Label>
-          <Label horizontalAlignment="center" class="price" row="0" col="2" [text]="food.price"></Label>
-          <Label horizontalAlignment="center" row="0" col="2" text="a" class="icon"></Label>
+          <Label horizontalAlignment="center" class="price" row="0" col="2" [text]="food.price + ' DH'"></Label>
+
           <Label horizontalAlignment="center" class="place" row="0" col="3" [text]="food.place"></Label>
         </GridLayout>
       </ng-template>

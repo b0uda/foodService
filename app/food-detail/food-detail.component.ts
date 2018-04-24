@@ -39,7 +39,8 @@ export class FoodDetailComponent implements OnInit {
 
   foodId;
   food: Food;
-  server = "http://192.168.1.4:3030/";
+  topFoods: Array<Food>;
+  server = "http://10.0.2.2:3030/";
   hasImage = false;
 
   // camera
@@ -61,6 +62,8 @@ export class FoodDetailComponent implements OnInit {
     this.pageRoute.activatedRoute
       .switchMap(activatedRoute => activatedRoute.params)
       .forEach((params) => { this.foodId = +params["id"]; });
+
+    this.topFoods = [];
   }
 
   findPlace() {
@@ -121,12 +124,13 @@ export class FoodDetailComponent implements OnInit {
         console.log(`error : ${error}`);
       });
 
-    console.log(`id : ${this.foodId}`);
 
+    // todo if tablet load top 3 data and show them
 
-
-
-
+    console.log(`device is ${_deviceType.toLowerCase()}`);
+    if (_deviceType.toLowerCase() == "phone") {
+      // here need retreive from server top 3 foods
+    }
 
   }
 
@@ -137,11 +141,11 @@ export class FoodDetailComponent implements OnInit {
 
     camera.takePicture()
       .then((imageAsset) => {
-        console.log("Result is an image asset instance");
+        // console.log("Result is an image asset instance");
         var image = new imageModule.Image();
         image.src = imageAsset;
 
-        console.log(image.src.android);
+
 
         let file_url: string = image.src.android;
 
