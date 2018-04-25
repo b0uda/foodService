@@ -109,9 +109,13 @@ export class FoodDetailComponent implements OnInit {
             img.imageSource = r;
             this.hasImage = true;
             console.log(r);
+            console.log("errrrrrr");
           }, (err) => {
             // Argument (e) is Error!
             console.log(err);
+
+            img.src = "res://noimage";
+
           });
 
           // console.log(`http://192.168.1.4:3030/uploads/${r}`);
