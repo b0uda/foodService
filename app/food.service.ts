@@ -8,7 +8,7 @@ import "rxjs/add/operator/do";
 export class FoodService {
 
 
-  private serverUrl = "http://10.0.2.2:3030/";
+  private serverUrl = "http://192.168.1.5:3030/";
 
   constructor(private http: HttpClient) {
   }
@@ -34,6 +34,13 @@ export class FoodService {
     let headers = this.createRequestHeader();
 
     return this.http.get(`${this.serverUrl}places`, { headers: headers })
+      .map(res => res);
+  }
+
+  getPlaceInfo(name: string) {
+    let headers = this.createRequestHeader();
+
+    return this.http.get(`${this.serverUrl}getPlaceInfo/${name.replace(/ /g, '')}`, { headers: headers })
       .map(res => res);
   }
 

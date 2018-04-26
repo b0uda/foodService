@@ -269,11 +269,7 @@ export class HomeComponent implements OnInit {
 
   // what to do with data returned from the service
   private onGetDataSuccess(res) {
-
-
-
     this.foodList = res;
-
   }
 
   // what to do if service returns ERROR

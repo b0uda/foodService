@@ -39,7 +39,7 @@
 
           <GridLayout class="icons-container" horizontalAlignment="right" rows="4dpi,auto ,4pi ,auto,4dpi ,auto" columns="auto">
 
-            <Label col="0" row="1" class="food_place_open" text="Ouvert : 8-16"></Label>
+            <Label col="0" row="1" class="food_place_open" [text]="'Ouvert :' + place.time "></Label>
             <Label col="0" row="1" horizontalAlignment="right" text="c" class="icon-location"></Label>
 
 

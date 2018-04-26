@@ -40,8 +40,9 @@ export class FoodDetailComponent implements OnInit {
   foodId;
   food: Food;
   topFoods: Array<Food>;
-  server = "http://10.0.2.2:3030/";
+  server = "http://192.168.1.5:3030/";
   hasImage = false;
+  place;
 
   // camera
 
@@ -67,9 +68,10 @@ export class FoodDetailComponent implements OnInit {
   }
 
   findPlace() {
+    console.log("lat " + Number(this.place.lat) + " long " + Number(this.place.long));
     locator.locate({
-      lat: 32.0000,
-      lng: -5.0000
+      lat: Number(this.place.lat),
+      lng: Number(this.place.long)
     }).then(() => {
       console.log("Maps app launched.");
     }, (error) => {
@@ -97,19 +99,17 @@ export class FoodDetailComponent implements OnInit {
         console.log(result);
         this.food = <Food>result;
 
+
+
         // console.log(`${this.server}getImage/${this.food.id}_${this.food.name.replace(/ /g, '')}_${this.food.place.replace(/ /g, '')}`);
 
         http.getString(`${this.server}getImage/${this.food.id}_${this.food.name.replace(/ /g, '')}_${this.food.place.replace(/ /g, '')}`).then((r) => {
           //// Argument (r) is string!
 
-
-
           http.getImage(`${this.server}uploads/${r}`).then((r) => {
             // Argument (r) is ImageSource!
             img.imageSource = r;
             this.hasImage = true;
-            console.log(r);
-            console.log("errrrrrr");
           }, (err) => {
             // Argument (e) is Error!
             console.log(err);
@@ -124,19 +124,36 @@ export class FoodDetailComponent implements OnInit {
 
         });
 
+        this.extractPlaceInfo();
+
       }, (error) => {
         console.log(`error : ${error}`);
       });
 
 
-    // todo if tablet load top 3 data and show them
 
+
+    // todo if tablet load top 3 data and show them
     console.log(`device is ${_deviceType.toLowerCase()}`);
     if (_deviceType.toLowerCase() == "phone") {
       // here need retreive from server top 3 foods
     }
 
   }
+
+
+  // call service ==> getPlaceInfo
+  extractPlaceInfo() {
+
+    console.log("extract place info launched : " + this.food.place);
+    this.foodService.getPlaceInfo(this.food.place)
+      .subscribe((result) => {
+        this.onGetDataSuccess(result);
+      }, (error) => {
+        this.onGetDataError(error);
+      });
+  }
+
 
   // Take Picture
   takePicture() {
@@ -149,8 +166,6 @@ export class FoodDetailComponent implements OnInit {
         var image = new imageModule.Image();
         image.src = imageAsset;
 
-
-
         let file_url: string = image.src.android;
 
         let file = image.src.android.split(".");
@@ -159,7 +174,6 @@ export class FoodDetailComponent implements OnInit {
         // file_url = selection[0].android;
 
         this.uploadFile(file[0], file[1]);
-
 
       }).catch(function (err) {
         console.log("Error -> " + err.message);
@@ -233,6 +247,21 @@ export class FoodDetailComponent implements OnInit {
       console.log('current bytes transfered: ' + e.currentBytes);
       console.log('Total bytes to transfer: ' + e.totalBytes);
     }
+  }
+
+  // what to do with data returned from the service
+  private onGetDataSuccess(res) {
+    // console.log("place info : ");
+    // console.dir(res);
+    this.place = res[0];
+    console.dir(this.place);
+  }
+
+  // what to do if service returns ERROR
+  private onGetDataError(error: Response | any) {
+    const body = error.json() || "";
+    const err = body.error || JSON.stringify(body);
+    console.log("onGetDataError: " + err);
   }
 
 }
