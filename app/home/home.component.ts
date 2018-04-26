@@ -110,6 +110,7 @@ export class HomeComponent implements OnInit {
   }
 
   public onopen() {
+    this.selectedIndexPlaces = 0;
     console.log("Drop Down opened.");
   }
 
@@ -215,6 +216,26 @@ export class HomeComponent implements OnInit {
     this.foodService.getFoodByCategory(this.budget, this.categories[this.selectedIndex])
       .subscribe((result) => {
         this.onGetDataSuccess(result);
+
+
+        let _places = [];
+        for (let i = 0; i < this.foodList.length; i++) {
+
+          let _place = this.foodList[i].place;
+
+          if (_places.indexOf(_place) == -1) {
+            _places.push(_place);
+          }
+        }
+        console.log("places: ");
+        _places = ["All", ..._places]
+        this.places = _places;
+
+
+
+        console.dir(_places);
+
+
         console.dir(result);
       }, (error) => {
         this.onGetDataError(error);
