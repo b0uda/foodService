@@ -89,7 +89,7 @@ export class HomeComponent implements OnInit {
   // Budget TextView Change load FoodsList again
   onBudgetChange(args) {
     let textField: TextField = <TextField>args.object;
-
+    this.selectedIndexPlaces = 0;
     //setTimeOut hack because this.budget doesnt update before textChanged method
     setTimeout(() => {
       if (isNaN(this.budget)) {
@@ -178,10 +178,31 @@ export class HomeComponent implements OnInit {
 
   // call service ==> getFoodByBudget
   extractFoodByBudget() {
+
+
     console.log("food by budget called");
     this.foodService.getFoodByBudget(this.budget)
       .subscribe((result) => {
         this.onGetDataSuccess(result);
+
+        let _places = [];
+        for (let i = 0; i < this.foodList.length; i++) {
+
+          let _place = this.foodList[i].place;
+
+          if (_places.indexOf(_place) == -1) {
+            _places.push(_place);
+          }
+        }
+        console.log("places: ");
+        _places = ["All", ..._places]
+        this.places = _places;
+
+        this.selectedIndexPlaces = 0;
+
+        console.dir(_places);
+
+
       }, (error) => {
         this.onGetDataError(error);
       });
@@ -194,6 +215,7 @@ export class HomeComponent implements OnInit {
     this.foodService.getFoodByCategory(this.budget, this.categories[this.selectedIndex])
       .subscribe((result) => {
         this.onGetDataSuccess(result);
+        console.dir(result);
       }, (error) => {
         this.onGetDataError(error);
       });
@@ -206,6 +228,7 @@ export class HomeComponent implements OnInit {
     this.foodService.getFoodByPlace(this.budget, this.places[this.selectedIndexPlaces].replace(/ /g, ''))
       .subscribe((result) => {
         this.onGetDataSuccess(result);
+        console.dir(result);
       }, (error) => {
         this.onGetDataError(error);
       });
@@ -216,6 +239,7 @@ export class HomeComponent implements OnInit {
     this.foodService.getFoodByCategoryAndPlace(this.budget, this.places[this.selectedIndexPlaces].replace(/ /g, ''), this.categories[this.selectedIndex])
       .subscribe((result) => {
         this.onGetDataSuccess(result);
+        console.dir(result);
       }, (error) => {
         this.onGetDataError(error);
       });
@@ -224,7 +248,11 @@ export class HomeComponent implements OnInit {
 
   // what to do with data returned from the service
   private onGetDataSuccess(res) {
+
+
+
     this.foodList = res;
+
   }
 
   // what to do if service returns ERROR
