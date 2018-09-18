@@ -8,10 +8,12 @@ import "rxjs/add/operator/do";
 export class FoodService {
 
 
-  private serverUrl = "http://192.168.1.5:3030/";
+  private serverUrl = "http://foodservice-216501.appspot.com/";
 
   constructor(private http: HttpClient) {
   }
+
+  // http://10.0.2.2:3030/   http://192.168.1.4:3030/
 
   // get All food
   getAllFood() {

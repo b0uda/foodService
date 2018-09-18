@@ -40,7 +40,7 @@ export class FoodDetailComponent implements OnInit {
   foodId;
   food: Food;
   topFoods: Array<Food>;
-  server = "http://192.168.1.5:3030/";
+  server = "http://foodservice-216501.appspot.com/";
   hasImage = false;
   place;
 
